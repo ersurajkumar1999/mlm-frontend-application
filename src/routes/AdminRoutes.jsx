@@ -14,5 +14,12 @@ const AdminRoutes = {
     ]
 };
 
-
-export default AdminRoutes;
+// Add prefix "admin" to all paths
+const prefixedAdminRoutes = {
+    ...AdminRoutes,
+    children: AdminRoutes.children.map(route => ({
+        ...route,
+        path: '/admin' + route.path
+    }))
+};
+export default prefixedAdminRoutes;

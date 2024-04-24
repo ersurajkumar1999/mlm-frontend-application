@@ -1,12 +1,16 @@
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginSchema } from '../../schemas/FormSchemas';
 import { useFormik } from "formik";
-
+import { userLogin } from "../../services/ApiService";
+import { login } from '../../store/slices/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 const LogainPage = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const initialValues = {
-        email: "",
-        password: "",
+        email: "devsuraj@gmail.com",
+        password: "devsuraj@",
         rememberMe: false,
     };
     const {
@@ -24,11 +28,12 @@ const LogainPage = () => {
                 email: values.email,
                 password: values.password
             };
-            console.log("data==>",data);
+            console.log("data==>", data);
             try {
                 setSubmitting(true);
-                // const response = await userLogin(data);
-                // // This is check Only Api Response 
+                const response = await userLogin(data);
+                console.log("response", response);
+                // This is check Only Api Response 
                 // if (!response.status) {
                 //     dispatch(setErrorMessage(response.data.message));
                 //     return;
@@ -38,9 +43,9 @@ const LogainPage = () => {
                 //     return;
                 // }
                 // dispatch(setSuccessMessage(response?.data?.message));
-                // resetForm();
-                // dispatch(login(response.data.data ?? null));
-                // navigate('/dashboard');
+                resetForm();
+                dispatch(login(response.data.data ?? null));
+                navigate('/admin/dashboard');
             } catch (error) {
                 // dispatch(setErrorMessage("Something is Wrong: error" + error));
             } finally {

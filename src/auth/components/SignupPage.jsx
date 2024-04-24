@@ -3,7 +3,7 @@ import { signUpSchema } from '../../schemas/FormSchemas';
 import { useFormik } from "formik";
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'; // Import icons from React Icons
 import { useState } from 'react';
-
+import { userSignUp } from "../../services/ApiService";
 const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -39,7 +39,8 @@ const SignupPage = () => {
       try {
         console.log("data", data);
         setSubmitting(true);
-        // const response = await userSignUp(data);
+        const response = await userSignUp(data);
+        console.log("response",response);
         // if (response.status) {
         //     resetForm();
         //     dispatch(setSuccessMessage(response.data.message));
