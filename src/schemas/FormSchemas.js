@@ -7,11 +7,20 @@ export const loginSchema = Yup.object({
 });
 
 export const signUpSchema = Yup.object({
-  firstName: Yup.string().min(2).max(50).required('Please enter your first name'),
-  lastName: Yup.string().min(2).max(50).required('Please enter your last name'),
-  email: Yup.string().email().required('Please enter your email'),
+  firstName: Yup.string().min(3).max(20).required('Please enter your first name'),
+  lastName: Yup.string().min(3).max(20).required('Please enter your last name'),
+  // email: Yup.string().email().required('Please enter your email'),
+  email: Yup.string()
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      'Invalid email address'
+    )
+    .required('Please enter your email'),
   password: Yup.string().min(6).required('Please enter your password'),
-  allowExtraEmails: Yup.boolean().oneOf([true], 'You must agree to receive emails').required('You must agree to receive emails'),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .required('Please confirm your password'),
+  iAgree: Yup.boolean().oneOf([true], 'You must agree before submitting.').required('You must agree before submitting.'),
 });
 
 export const forgotPasswordSchema = Yup.object({
