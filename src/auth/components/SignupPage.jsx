@@ -55,6 +55,7 @@ const SignupPage = () => {
   });
 
   console.log("errors", errors);
+  console.log("values",values);
   return (
     <div className="card-body">
       <div className="pt-4 pb-2">
@@ -116,7 +117,19 @@ const SignupPage = () => {
           </div>
         </div>
         <div className="col-12">
-          <label htmlFor="password" className="form-label">Password</label>
+          <label htmlFor="password" className="form-label"> Password (
+            {showPassword ?
+              <AiOutlineEyeInvisible
+                className='password-icon'
+                onClick={togglePasswordVisibility}
+              /> :
+              <AiOutlineEye
+                className='password-icon'
+                onClick={togglePasswordVisibility}
+
+              />}
+            )
+          </label>
           <input
             type={showPassword ? "text" : "password"}
             name="password"
@@ -128,16 +141,7 @@ const SignupPage = () => {
             onBlur={handleBlur}
             disabled={isSubmitting}
           />
-          {showPassword ?
-            <AiOutlineEyeInvisible
-              className='password-icon'
-              onClick={togglePasswordVisibility}
-            /> :
-            <AiOutlineEye
-              className='password-icon'
-              onClick={togglePasswordVisibility}
 
-            />}
 
           {errors.password && touched.password && (
             <div className="invalid-feedback">{errors.password}</div>
@@ -146,7 +150,7 @@ const SignupPage = () => {
         <div className="col-12">
           <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
           <input
-            type="password"
+             type={showPassword ? "text" : "password"}
             name="confirmPassword"
             className={`form-control ${errors.confirmPassword && touched.confirmPassword ? 'is-invalid' : touched.confirmPassword ? 'is-valid' : ''}`}
             id="yourPassword"
@@ -163,7 +167,7 @@ const SignupPage = () => {
         <div className="col-12">
           <div className="form-check">
             <input
-              className="form-check-input"
+              className={`form-check-input ${errors.iAgree && touched.iAgree ? 'is-invalid' : touched.iAgree ? 'is-valid' : ''}`}
               type="checkbox"
               name="iAgree"
               checked={values.iAgree}
@@ -172,9 +176,6 @@ const SignupPage = () => {
               disabled={isSubmitting}
             />
             <label className="form-check-label" htmlFor="iAgree">I agree and accept the <a href="#">terms and conditions</a></label>
-            {errors.confirmPassword && touched.confirmPassword && (
-              <div className="invalid-feedback">{errors.confirmPassword}</div>
-            )}
           </div>
         </div>
         <div className="col-12">
