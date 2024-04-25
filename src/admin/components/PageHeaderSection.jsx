@@ -7,7 +7,7 @@ const PageHeaderSection = ({ title }) => {
             <nav>
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                        <Link to={'/dashboard'}>Home</Link>
+                        <Link to={'/admin/dashboard'}>Home</Link>
                     </li>
                     <li className="breadcrumb-item active">{title}</li>
                 </ol>

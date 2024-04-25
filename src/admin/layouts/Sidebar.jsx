@@ -6,7 +6,7 @@ const Sidebar = () => {
         <aside id="sidebar" className="sidebar">
             <ul className="sidebar-nav" id="sidebar-nav">
                 <li className="nav-item">
-                    <Link to={'/dashboard'} className="nav-link ">
+                    <Link to={'/admin/dashboard'} className="nav-link ">
                         <i className="bi bi-grid"></i>
                         <span>Dashboard</span>
                     </Link>
@@ -18,12 +18,12 @@ const Sidebar = () => {
                     </a>
                     <ul id="user-list" className="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
-                            <Link to={'user-list'}>
+                            <Link to={'/admin/user-list'}>
                                 <i className="bi bi-circle"></i><span>User List</span>
                             </Link>
                         </li>
                         <li>
-                            <Link to={'manager-list'}>
+                            <Link to={'/admin/manager-list'}>
                                 <i className="bi bi-circle"></i><span>Manager List</span>
                             </Link>
                         </li>
